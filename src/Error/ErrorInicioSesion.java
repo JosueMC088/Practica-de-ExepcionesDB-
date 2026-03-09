@@ -3,7 +3,7 @@ package Error;
 public class ErrorInicioSesion extends ErrorBanca {
 
     public ErrorInicioSesion() {
-        super("Error de credenciales.. Revisa contraseña", 2002);
+        super("Excepción de base de datos capturada y gestionada.", 2002);
     }
 
 }

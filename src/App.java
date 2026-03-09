@@ -9,8 +9,10 @@ public class App {
         Scanner entrada = new Scanner(System.in);
         CajeroServicio cajero = new CajeroServicio();
 
+        System.out.println("Ingrese su nombre: ");
         String user = entrada.nextLine();
 
+        System.out.println("Ingrese su Contraseña: ");
         String contraseña = entrada.nextLine();
         try {
 

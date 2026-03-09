@@ -1,4 +1,4 @@
-package Error;
+package Error.ErroresBD;
 
 public class ErrorBD extends Exception {
 

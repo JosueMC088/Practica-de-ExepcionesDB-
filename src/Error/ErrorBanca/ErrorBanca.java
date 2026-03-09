@@ -1,4 +1,4 @@
-package Error;
+package Error.ErrorBanca;
 
 public class ErrorBanca extends Exception {
 

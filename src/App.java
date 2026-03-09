@@ -1,8 +1,8 @@
 import java.util.Scanner;
 
-import Error.ErrorBD;
-import Error.ErrorBanca;
-import Error.ErrorInicioSesion;
+import Error.ErrorBanca.ErrorBanca;
+import Error.ErrorBanca.ErrorInicioSesion;
+import Error.ErroresBD.ErrorBD;
 
 public class App {
     public static void main(String[] args) {

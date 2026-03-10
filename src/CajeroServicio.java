@@ -12,6 +12,27 @@ public class CajeroServicio {
 
     private ConexionBD conexionbD = new ConexionBD();
 
+    public boolean existeUsuario(String user) throws UsuarioNoEncontrado, ErrorBD {
+        String sql = "SELECT saldo from usuarios WHERE username = ?";
+        ConexionBD conexionbD = new ConexionBD();
+
+        try (Connection con = conexionbD.conectar();
+                PreparedStatement smts = con.prepareStatement(sql)) {
+
+            smts.setString(1, user);
+            ResultSet rs = smts.executeQuery();
+
+            if (rs.next()) {
+                return true;
+            } else {
+                throw new UsuarioNoEncontrado();
+            }
+
+        } catch (SQLException e) {
+            throw new ErrorBD(e.getMessage());
+        }
+    }
+
     public double consultarSaldo(String username) throws ErrorBanca, ErrorBD {
         String sql = "SELECT saldo from usuarios WHERE username = ?";
 

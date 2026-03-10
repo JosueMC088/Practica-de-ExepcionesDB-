@@ -9,6 +9,7 @@ public class App {
         Scanner entrada = new Scanner(System.in);
         CajeroServicio cajero = new CajeroServicio();
 
+        System.out.println("|-- Bienvenido a la AppBanco --|");
         System.out.println("Ingrese su nombre: ");
         String user = entrada.nextLine();
 
@@ -16,21 +17,17 @@ public class App {
         String contraseña = entrada.nextLine();
         try {
 
-            if (cajero.IniciarSion(user, contraseña)) {
-                double saldo = cajero.consultarSaldo(user);
-                System.out.println("Hola " + user + " tu saldo es de : $" + saldo);
-                System.out.println("\n");
-                cajero.mostrarReporteAdmin();
-
+            if (cajero.existeUsuario(user)) {
+                System.out.println("Usuario existe");
             } else {
-                System.out.println("Usuario no Encontrado");
+                System.out.println("Usuario no Existe");
             }
 
         } catch (ErrorBanca e) {
             if (e instanceof ErrorInicioSesion) {
                 System.out.println(e.getMessage());
             }
-            System.out.println("Banner Amarillo: " + e.getMessage());
+            System.out.println("Banner" + e.getMessage());
 
         } catch (ErrorBD e) {
             System.out.println(e.getMessage());

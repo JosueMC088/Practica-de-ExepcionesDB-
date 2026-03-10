@@ -33,7 +33,7 @@ public class CajeroServicio {
         }
     }
 
-    public double consultarSaldo(String username) throws ErrorBanca, ErrorBD {
+    public double consultarSaldo(String username) throws ErrorBD {
         String sql = "SELECT saldo from usuarios WHERE username = ?";
 
         try (Connection con = conexionbD.conectar();
@@ -44,13 +44,12 @@ public class CajeroServicio {
 
             if (rs.next()) {
                 return rs.getDouble("saldo");
-            } else {
-                throw new UsuarioNoEncontrado();
             }
 
         } catch (SQLException e) {
             throw new ErrorBD(e.getMessage());
         }
+        return 0;
 
     };
 
@@ -66,8 +65,9 @@ public class CajeroServicio {
             stmst.setString(2, password);
 
             ResultSet rs = stmst.executeQuery();
+
             if (rs.next()) {
-                return true;
+                return rs.getBoolean("admin");
             } else {
                 throw new ErrorInicioSesion();
             }

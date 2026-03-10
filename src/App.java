@@ -8,8 +8,9 @@ public class App {
     public static void main(String[] args) {
         Scanner entrada = new Scanner(System.in);
         CajeroServicio cajero = new CajeroServicio();
+        String pantalla = "Login";
 
-        System.out.println("|-- Bienvenido a la AppBanco --|");
+        System.out.println("|-- Bienvenido a la AppBanco --|" + pantalla);
         System.out.println("Ingrese su nombre: ");
         String user = entrada.nextLine();
 
@@ -18,16 +19,18 @@ public class App {
         try {
 
             if (cajero.existeUsuario(user)) {
-                System.out.println("Usuario existe");
-            } else {
-                System.out.println("Usuario no Existe");
+                if (cajero.IniciarSion(user, contraseña)) {
+                    System.out.println("Eres admin");
+                } else {
+                    System.out.println("No eres Admin");
+                }
             }
 
         } catch (ErrorBanca e) {
             if (e instanceof ErrorInicioSesion) {
                 System.out.println(e.getMessage());
             }
-            System.out.println("Banner" + e.getMessage());
+            System.out.println("Banner: " + e.getMessage());
 
         } catch (ErrorBD e) {
             System.out.println(e.getMessage());

@@ -88,7 +88,8 @@ public class CajeroServicio {
 
             System.out.println("|-- Reporte de Usuario --|");
             while (rs.next()) {
-                System.out.println("Usuario: " + rs.getString("username") + " |saldo: " + rs.getDouble("saldo"));
+
+                System.out.printf("User: %-8S | Saldo: %8.2f%n", rs.getString("username"), rs.getDouble("saldo"));
             }
 
         } catch (SQLException e) {

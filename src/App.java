@@ -1,5 +1,4 @@
 import java.util.Scanner;
-
 import Error.ErrorBanca.ErrorBanca;
 import Error.ErrorBanca.ErrorInicioSesion;
 import Error.ErroresBD.ErrorBD;
@@ -19,8 +18,43 @@ public class App {
         try {
 
             if (cajero.existeUsuario(user)) {
+
                 if (cajero.IniciarSion(user, contraseña)) {
-                    System.out.println("Eres admin");
+
+                    String op = "";
+                    do {
+                        System.out.println("\n|-- Vista Admin --|");
+                        System.out.println("1.- Ver registros");
+                        System.out.println("2.- Agregar usuario");
+                        System.out.println("3.- Eliminar Usuario");
+                        System.out.println("4.- Salir");
+                        op = entrada.nextLine();
+
+                        switch (op) {
+                            case "1":
+                                cajero.mostrarReporteAdmin();
+                                entrada.nextLine();
+                                System.out.println("\n");
+                                break;
+
+                            case "2":
+
+                                break;
+                            case "3":
+
+                                break;
+
+                            case "4":
+                                op = "/";
+                                break;
+
+                            default:
+                                System.out.println("Opcion invorrecta");
+                                break;
+                        }
+
+                    } while (!(op == "/"));
+
                 } else {
                     System.out.println("No eres Admin");
                 }

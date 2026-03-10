@@ -22,7 +22,7 @@ public class App {
                 if (cajero.IniciarSion(user, contraseña)) {
 
                     String op = "";
-                    do {
+                    while (!(op == "/")) {
                         System.out.println("\n|-- Vista Admin --|");
                         System.out.println("1.- Ver registros");
                         System.out.println("2.- Agregar usuario");
@@ -38,8 +38,19 @@ public class App {
                                 break;
 
                             case "2":
+                                System.out.println("Ingrese nombre y contraseña de nueva cuenta");
+                                System.out.println("Nombre:");
+                                String usuario = entrada.nextLine();
 
+                                System.out.println("Contraseña: ");
+                                String passsword = entrada.next();
+
+                                System.out.println("Saldo: ");
+                                double saldo = entrada.nextDouble();
+
+                                cajero.AgregarUsuario(usuario, passsword, saldo);
                                 break;
+
                             case "3":
 
                                 break;
@@ -51,12 +62,12 @@ public class App {
                             default:
                                 System.out.println("Opcion invorrecta");
                                 break;
+
                         }
 
-                    } while (!(op == "/"));
-
+                    }
                 } else {
-                    System.out.println("No eres Admin");
+                    System.out.println("No eres admin");
                 }
             }
 

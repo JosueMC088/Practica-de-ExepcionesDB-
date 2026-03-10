@@ -1,3 +1,4 @@
+import java.lang.reflect.Parameter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -6,6 +7,7 @@ import java.sql.SQLException;
 import Error.ErrorBanca.ErrorBanca;
 import Error.ErrorBanca.ErrorInicioSesion;
 import Error.ErrorBanca.UsuarioNoEncontrado;
+import Error.ErrorBanca.usuarioExistenteError;
 import Error.ErroresBD.ErrorBD;
 
 public class CajeroServicio {
@@ -96,6 +98,43 @@ public class CajeroServicio {
             throw new ErrorBD(e.getMessage());
         }
 
+    }
+
+    public void AgregarUsuario(String user, String password, double saldo)
+            throws ErrorBD, usuarioExistenteError {
+        String busqueda = "SELECT saldo from usuarios WHERE username = ?";
+        String insercion = "INSERT INTO usuarios (username, contrasena,saldo) VALUES (?,?,?)";
+        int afecto;
+
+        // "INSERT INTO usuarios (username, contrasena) VALUES (?,?)";
+        ConexionBD conexionDB = new ConexionBD();
+
+        try (Connection con = conexionDB.conectar();
+                PreparedStatement stms = con.prepareStatement(busqueda);) {
+
+            stms.setString(1, user);
+
+            if (!(stms.executeQuery().next())) {
+                try (PreparedStatement stms2 = con.prepareStatement(insercion)) {
+                    stms2.setString(1, user);
+                    stms2.setString(2, password);
+                    stms2.setDouble(3, saldo);
+
+                    afecto = stms2.executeUpdate();
+                    if (afecto > 0) {
+                        System.out.println("Agregacion Correcta.. ");
+                    }
+
+                }
+
+            } else {
+                throw new usuarioExistenteError();
+
+            }
+
+        } catch (SQLException e) {
+            throw new ErrorBD(e.getMessage());
+        }
     }
 
 }

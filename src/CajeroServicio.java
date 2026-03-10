@@ -57,4 +57,23 @@ public class CajeroServicio {
 
     }
 
+    public void mostrarReporteAdmin() throws ErrorBD {
+        String busqueda = "SELECT username, saldo FROM usuarios";
+        ConexionBD conexionbD = new ConexionBD();
+
+        try (Connection con = conexionbD.conectar();
+                PreparedStatement stms = con.prepareStatement(busqueda);
+                ResultSet rs = stms.executeQuery();) {
+
+            System.out.println("|-- Reporte de Usuario --|");
+            while (rs.next()) {
+                System.out.println("Usuario: " + rs.getString("username") + " |saldo: " + rs.getDouble("saldo"));
+            }
+
+        } catch (SQLException e) {
+            throw new ErrorBD(e.getMessage());
+        }
+
+    }
+
 }

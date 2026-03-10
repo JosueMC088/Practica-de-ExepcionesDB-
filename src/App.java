@@ -19,6 +19,8 @@ public class App {
             if (cajero.IniciarSion(user, contraseña)) {
                 double saldo = cajero.consultarSaldo(user);
                 System.out.println("Hola " + user + " tu saldo es de : $" + saldo);
+                System.out.println("\n");
+                cajero.mostrarReporteAdmin();
 
             } else {
                 System.out.println("Usuario no Encontrado");

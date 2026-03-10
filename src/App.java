@@ -52,6 +52,10 @@ public class App {
                                 break;
 
                             case "3":
+                                System.out.println("|-- Elimnar Cliente --|");
+                                System.out.println("Cliente a Eliminar: ");
+                                usuario = entrada.nextLine();
+                                cajero.eliminarUsuario(usuario);
 
                                 break;
 

@@ -137,4 +137,26 @@ public class CajeroServicio {
         }
     }
 
+    public void eliminarUsuario(String user) throws ErrorBD, usuarioExistenteError, UsuarioNoEncontrado {
+        ConexionBD conexiondb = new ConexionBD();
+        String eliminacion = "DELETE FROM usuarios WHERE username = ?;";
+
+        existeUsuario(user);
+
+        try (Connection con = conexiondb.conectar();
+                PreparedStatement stms = con.prepareStatement(eliminacion)) {
+
+            stms.setString(1, user);
+            if (stms.executeUpdate() > 0) {
+                System.out.println("Se elimino Correctamente: " + user);
+            } else {
+                System.out.println("Algo salio mal");
+            }
+
+        } catch (SQLException e) {
+            throw new ErrorBD(e.getMessage());
+        }
+
+    }
+
 }
